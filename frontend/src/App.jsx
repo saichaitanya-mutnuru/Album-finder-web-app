@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 
 import Navbar from "./components/Navbar";
@@ -20,6 +20,7 @@ function App() {
   // ======================
   // POPULAR SONGS
   // ======================
+  useEffect(() => {
   async function fetchPopular() {
     setLoading(true);
 
@@ -33,9 +34,8 @@ function App() {
     setLoading(false);
   }
 
-  useEffect(() => {
-    fetchPopular();
-  }, []);
+  fetchPopular();
+}, []);
 
   // ======================
   // SEARCH ALBUMS
@@ -66,45 +66,45 @@ function App() {
   // ======================
   // LOAD MORE
   // ======================
-  const loadMore = async () => {
-    if (loadingMore || !query.trim()) return;
+  const loadMore = useCallback(async () => {
+  if (loadingMore || !query.trim()) return;
 
-    const nextPage = page + 1;
-    setLoadingMore(true);
+  const nextPage = page + 1;
+  setLoadingMore(true);
 
-    try {
-      const res = await axios.get(
-        `http://localhost:5000/api/search?q=${query}&page=${nextPage}&limit=20`
-      );
+  try {
+    const res = await axios.get(
+      `http://localhost:5000/api/search?q=${query}&page=${nextPage}&limit=20`
+    );
 
-      setAlbums((prev) => [...prev, ...res.data]);
-      setPage(nextPage);
-    } catch (err) {
-      console.log(err);
-    }
+    setAlbums((prev) => [...prev, ...res.data]);
+    setPage(nextPage);
+  } catch (err) {
+    console.log(err);
+  }
 
-    setLoadingMore(false);
-  };
+  setLoadingMore(false);
+}, [page, query, loadingMore]);
 
   // ======================
   // SCROLL HANDLER (FIXED)
   // ======================
   useEffect(() => {
-    const handleScroll = () => {
-      if (
-        window.innerHeight + window.scrollY >=
-        document.body.offsetHeight - 100
-      ) {
-        loadMore();
-      }
-    };
+  const handleScroll = () => {
+    if (
+      window.innerHeight + window.scrollY >=
+      document.body.offsetHeight - 100
+    ) {
+      loadMore();
+    }
+  };
 
-    window.addEventListener("scroll", handleScroll);
+  window.addEventListener("scroll", handleScroll);
 
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, [page, query, loadingMore]);
+  return () => {
+    window.removeEventListener("scroll", handleScroll);
+  };
+}, [loadMore]);
 
   return (
     <div className="container">

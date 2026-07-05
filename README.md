@@ -56,8 +56,8 @@ album-finder/
 ## Installation & Setup
 
 ### 1️⃣ Clone the repository
-git clone [https://github.com/saichaitanya-mutnuru/album-finder.git](https://github.com/saichaitanya-mutnuru/album-finder.git)
-cd album-finder
+git clone [https://github.com/saichaitanya-mutnuru/album-finder-web-app.git](https://github.com/saichaitanya-mutnuru/album-finder-web-app.git)
+cd album-finder-web-app
 
 
 ### 2️⃣ Backend Setup (Flask)

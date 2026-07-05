@@ -92,9 +92,9 @@ UI displays albums dynamically
 ## 📸 Screenshots
 
 <p align="center">
-  <img src="assets/home.png" width="30%">
-  <img src="assets/search.png" width="30%">
-  <img src="assets/todayspick.png" width="30%">
+  <img src="frontend/assets/home.png" width="32%">
+<img src="frontend/assets/search.png" width="32%">
+<img src="frontend/assets/todayspick.png" width="32%">
 </p>
 ---
 

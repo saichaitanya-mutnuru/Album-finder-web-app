@@ -1,0 +1,109 @@
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:#121212;
+color:white;
+}
+
+.container{
+width:90%;
+margin:auto;
+padding:30px;
+}
+
+.navbar{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:30px;
+}
+
+.tabs button{
+margin-left:10px;
+padding:10px 18px;
+border:none;
+cursor:pointer;
+border-radius:8px;
+background:#333;
+color:white;
+}
+
+.tabs .active{
+background:#1DB954;
+}
+
+.search-container{
+display:flex;
+justify-content:center;
+gap:10px;
+margin-bottom:30px;
+}
+
+.search-container input{
+width:350px;
+padding:12px;
+border:none;
+border-radius:8px;
+}
+
+.search-container button{
+padding:12px 20px;
+border:none;
+border-radius:8px;
+background:#1DB954;
+color:white;
+cursor:pointer;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+gap:20px;
+}
+
+.card{
+background:#1e1e1e;
+padding:15px;
+border-radius:10px;
+text-align:center;
+transition:.3s;
+}
+
+.card:hover{
+transform:translateY(-5px);
+}
+
+.card img{
+width:100%;
+border-radius:8px;
+}
+
+.card h3{
+margin:10px 0;
+font-size:18px;
+}
+
+.card p{
+color:#bbb;
+}
+
+.card small{
+color:#1DB954;
+}
+
+.logo{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.logo img{
+  width:45px;
+  height:45px;
+  border-radius:10px;
+}

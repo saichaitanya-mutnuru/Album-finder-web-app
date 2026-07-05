@@ -1,13 +1,19 @@
 function AlbumCard({ album }) {
   return (
     <div className="card">
-      <img src={album.artwork} alt={album.album} />
 
-      <h3>{album.album}</h3>
+      <div className="image-wrapper">
+        <img
+          src={album.artwork || "https://via.placeholder.com/300"}
+          alt={album.album || "Album"}
+          loading="lazy"
+        />
+      </div>
 
-      <p>{album.artist}</p>
+      <h3>{album.album || "Unknown Album"}</h3>
+      <p>{album.artist || "Unknown Artist"}</p>
+      <small>{album.releaseDate || "N/A"}</small>
 
-      <small>{album.releaseDate}</small>
     </div>
   );
 }

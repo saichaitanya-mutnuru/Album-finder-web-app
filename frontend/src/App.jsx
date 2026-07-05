@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 
 import Navbar from "./components/Navbar";
@@ -11,18 +11,48 @@ function App() {
   const [query, setQuery] = useState("");
   const [albums, setAlbums] = useState([]);
   const [songs, setSongs] = useState([]);
-  const [activeTab, setActiveTab] = useState("search");
   const [loading, setLoading] = useState(false);
+  const [showToday, setShowToday] = useState(false);
+  const [page, setPage] = useState(1);
+  const [loadingMore, setLoadingMore] = useState(false);
+  const [hasSearched, setHasSearched] = useState(false);
 
-  // Search Albums
-  const searchAlbums = async () => {
-    if (!query.trim()) return;
-
+  // ======================
+  // POPULAR SONGS
+  // ======================
+  async function fetchPopular() {
     setLoading(true);
 
     try {
+      const res = await axios.get("http://localhost:5000/api/popular");
+      setSongs(res.data);
+    } catch (err) {
+      console.log(err);
+    }
+
+    setLoading(false);
+  }
+
+  useEffect(() => {
+    fetchPopular();
+  }, []);
+
+  // ======================
+  // SEARCH ALBUMS
+  // ======================
+  const searchAlbums = async () => {
+    const cleanQuery = query.trim();
+
+    if (!cleanQuery) return;
+
+    setLoading(true);
+    setHasSearched(true);
+    setPage(1);
+    setAlbums([]);
+
+    try {
       const res = await axios.get(
-        `http://127.0.0.1:5000/api/search?q=${query}`
+        `http://localhost:5000/api/search?q=${cleanQuery}&page=1&limit=20`
       );
 
       setAlbums(res.data);
@@ -33,87 +63,110 @@ function App() {
     setLoading(false);
   };
 
-  // Fetch Popular Songs
-  const fetchPopular = async () => {
-    setLoading(true);
+  // ======================
+  // LOAD MORE
+  // ======================
+  const loadMore = async () => {
+    if (loadingMore || !query.trim()) return;
+
+    const nextPage = page + 1;
+    setLoadingMore(true);
 
     try {
       const res = await axios.get(
-        "http://127.0.0.1:5000/api/popular"
+        `http://localhost:5000/api/search?q=${query}&page=${nextPage}&limit=20`
       );
 
-      setSongs(res.data);
+      setAlbums((prev) => [...prev, ...res.data]);
+      setPage(nextPage);
     } catch (err) {
       console.log(err);
     }
 
-    setLoading(false);
+    setLoadingMore(false);
   };
 
-  const handleTabChange = (tab) => {
-    setActiveTab(tab);
+  // ======================
+  // SCROLL HANDLER (FIXED)
+  // ======================
+  useEffect(() => {
+    const handleScroll = () => {
+      if (
+        window.innerHeight + window.scrollY >=
+        document.body.offsetHeight - 100
+      ) {
+        loadMore();
+      }
+    };
 
-    if (tab === "popular") {
-      fetchPopular();
-    }
-  };
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [page, query, loadingMore]);
 
   return (
     <div className="container">
+      <Navbar />
 
-      <Navbar
-        activeTab={activeTab}
-        setActiveTab={handleTabChange}
+      {/* SEARCH BAR */}
+      <SearchBar
+        query={query}
+        setQuery={setQuery}
+        searchAlbums={searchAlbums}
       />
 
-      {/* SEARCH TAB */}
-      {activeTab === "search" && (
-        <>
-          <SearchBar
-            query={query}
-            setQuery={setQuery}
-            searchAlbums={searchAlbums}
-          />
+      {/* TAB */}
+      <div className="tab-bar">
+        <button
+          className="today-tab"
+          onClick={() => setShowToday(!showToday)}
+        >
+          Today's Picks
+        </button>
+      </div>
 
-          {loading && <h2>Loading...</h2>}
-
-          <div className="grid">
-            {albums.map((album, index) => (
-              <AlbumCard key={index} album={album} />
-            ))}
-          </div>
-        </>
+      {/* LOADING */}
+      {loading && (
+        <h3 style={{ textAlign: "center" }}>
+          Loading...
+        </h3>
       )}
 
-      {/*POPULAR SONGS TAB */}
-      {activeTab === "popular" && (
+      {/* TODAY'S PICKS */}
+      {showToday && (
         <>
-          <h2 style={{ textAlign: "center", marginBottom: "20px" }}>
-            🔥 Today's Picks
-          </h2>
-
-          {loading && <h2>Loading songs...</h2>}
+          <h2 className="section-title">🔥 Today's Picks</h2>
 
           <div className="grid">
             {songs.map((song, index) => (
               <div key={index} className="card">
-                <img src={song.artwork} alt="" />
-
+                <img src={song.artwork} alt={song.track} />
                 <h3>{song.track}</h3>
                 <p>{song.artist}</p>
-                <small>{song.album}</small>
-
-                {song.preview && (
-                  <audio controls style={{ width: "100%", marginTop: "10px" }}>
-                    <source src={song.preview} />
-                  </audio>
-                )}
               </div>
             ))}
           </div>
         </>
       )}
 
+      {/* SEARCH RESULTS */}
+      {!hasSearched ? (
+        <p style={{ textAlign: "center", color: "#bbb" }}>
+          Search for albums above 🎧
+        </p>
+      ) : albums.length === 0 ? (
+        <p style={{ textAlign: "center", color: "#bbb" }}>
+          No results found 🔍
+        </p>
+      ) : (
+        <div className="grid">
+          {albums.map((album, index) => (
+            <AlbumCard key={index} album={album} />
+          ))}
+        </div>
+      )}
     </div>
   );
 }

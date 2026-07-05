@@ -41,11 +41,11 @@ album-finder/
 │   └── app.py
 │
 ├── frontend/
-│   ├── src/
 |   |─────── public/
 |   |       |──home.png
 |   |       |──home.png
 |   |       |──home.png
+│   ├── src/
 │   │────── components/
 │   │       ├── Navbar.jsx
 │   │       ├── SearchBar.jsx

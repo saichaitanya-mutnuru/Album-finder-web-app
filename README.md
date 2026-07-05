@@ -42,12 +42,16 @@ album-finder/
 │
 ├── frontend/
 │   ├── src/
-│   │   ├── components/
-│   │   │   ├── Navbar.jsx
-│   │   │   ├── SearchBar.jsx
-│   │   │   └── AlbumCard.jsx
-│   │   ├── App.jsx
-│   │   └── App.css
+|   |─────── public/
+|   |       |──home.png
+|   |       |──home.png
+|   |       |──home.png
+│   │────── components/
+│   │       ├── Navbar.jsx
+│   │       ├── SearchBar.jsx
+│   │       └── AlbumCard.jsx
+│   │── App.jsx
+│   │── App.css
 │   │
 └── README.md
 ```
@@ -98,7 +102,7 @@ http://localhost:5173
 
 | Home | Search | Today's Picks |
 | :---: | :---: | :---: |
-| ![Home](frontend/assets/home.png) | ![Search](frontend/assets/search.png) | ![Today's Picks](frontend/assets/todayspick.png) |
+| ![Home](frontend/public/home.png) | ![Search](frontend/public/search.png) | ![Today's Picks](frontend/public/todayspick.png) |
 
 ## Upcoming Features:
 • Audio preview player

@@ -3,7 +3,7 @@ function Navbar() {
     <nav className="navbar">
 
       <h1 className="logo">
-        <img src="/favicon.png" alt="Album Finder Logo" />
+        <img src="/logo.png" alt="logo" />
         Album Finder
       </h1>
 

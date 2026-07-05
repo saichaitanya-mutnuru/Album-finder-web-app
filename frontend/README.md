@@ -1,16 +1,121 @@
-# React + Vite
+🎧 Album Finder Web App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern music discovery web app that allows users to search albums and explore trending songs using the iTunes API. Built with React (Vite) and Flask.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+🚀 Features:
+Search albums by artist or name
+View trending “Today’s Picks” songs
+Infinite scroll for search results
+Responsive UI (mobile + desktop)
+Dark-themed modern UI
+Fast Flask backend API integration
+High-quality album artwork display
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Tech Stack--
 
-## Expanding the ESLint configuration
+Frontend:
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+React (Vite)
+Axios
+CSS3 (custom styling)
+
+Backend:
+
+Flask (Python)
+Flask-CORS
+Requests
+
+API:
+
+iTunes Search API
+
+---
+
+📂 Project Structure
+album-finder/
+│
+├── backend/
+│   └── app.py
+│
+├── frontend/
+│   ├── src/
+│   │   ├── components/
+│   │   │   ├── Navbar.jsx
+│   │   │   ├── SearchBar.jsx
+│   │   │   └── AlbumCard.jsx
+│   │   ├── App.jsx
+│   │   └── App.css
+│
+└── README.md
+
+---
+
+⚙️ Installation & Setup
+
+1️⃣ Clone the repository
+git clone https://github.com/your-username/album-finder.git
+cd album-finder
+
+
+2️⃣ Backend Setup (Flask)
+cd backend
+pip install flask flask-cors requests
+python app.py
+
+Backend runs on:
+
+http://localhost:5000
+
+3️⃣ Frontend Setup (React)
+cd frontend
+npm install
+npm run dev
+
+Frontend runs on:
+
+http://localhost:5173
+
+> How It Works
+User searches an album/artist
+React sends request to Flask backend
+Backend fetches data from iTunes API
+JSON response is sent back to frontend
+UI displays albums dynamically
+
+---
+
+📸 Screenshots
+
+Home Page
+![home Page](assets/home.png)
+Search Page 
+![Search Page](assets/search.png)
+Today’s Picks
+![Today's Picks](assets/todayspick.png)
+
+---
+
+Upcoming Features:
+ -- -- Audio preview player
+ -- -- Favorite/save albums
+ -- -- Dark/light theme toggle
+
+
+---
+
+Author
+Built by Sai Chaitanya
+
+📜 License (MIT)
+
+This project is open source and free to use.
+
+---
+
+If you like this project
+
+Give it a ⭐ on GitHub and share it!

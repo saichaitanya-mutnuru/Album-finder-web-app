@@ -4,7 +4,7 @@ A modern music discovery web app that allows users to search albums and explore 
 
 ---
 
-🚀 Features:
+## 🚀 Features:
 Search albums by artist or name
 View trending “Today’s Picks” songs
 Infinite scroll for search results
@@ -35,7 +35,7 @@ iTunes Search API
 
 ---
 
-📂 Project Structure
+## 📂 Project Structure
 album-finder/
 │
 ├── backend/
@@ -54,10 +54,10 @@ album-finder/
 
 ---
 
-⚙️ Installation & Setup
+## Installation & Setup
 
 1️⃣ Clone the repository
-git clone https://github.com/your-username/album-finder.git
+git clone https://github.com/saichaitanya-mutnuru/album-finder.git
 cd album-finder
 
 
@@ -79,7 +79,7 @@ Frontend runs on:
 
 http://localhost:5173
 
-> How It Works
+## How It Works
 User searches an album/artist
 React sends request to Flask backend
 Backend fetches data from iTunes API
@@ -88,18 +88,17 @@ UI displays albums dynamically
 
 ---
 
-📸 Screenshots
 
-Home Page
-![home Page](assets/home.png)
-Search Page 
-![Search Page](assets/search.png)
-Today’s Picks
-![Today's Picks](assets/todayspick.png)
+## 📸 Screenshots
 
+<p align="center">
+  <img src="assets/home.png" width="30%">
+  <img src="assets/search.png" width="30%">
+  <img src="assets/todayspick.png" width="30%">
+</p>
 ---
 
-Upcoming Features:
+## Upcoming Features:
  -- -- Audio preview player
  -- -- Favorite/save albums
  -- -- Dark/light theme toggle
@@ -107,7 +106,7 @@ Upcoming Features:
 
 ---
 
-Author
+## Author
 Built by Sai Chaitanya
 
 📜 License (MIT)

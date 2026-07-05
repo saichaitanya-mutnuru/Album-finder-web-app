@@ -10,7 +10,7 @@ def home():
     return "Album Finder API is running!"
 
 
-# 🔍 SEARCH ALBUMS
+#  SEARCH ALBUMS
 @app.route("/api/search")
 def search():
     query = request.args.get("q")
@@ -23,7 +23,7 @@ def search():
         params = {
             "term": query,
             "entity": "album",
-            "limit": 20
+            "limit": 25
         }
 
         response = requests.get(url, params=params, timeout=5)
@@ -32,21 +32,22 @@ def search():
         albums = []
 
         for item in data.get("results", []):
-            albums.append({
-                "album": item.get("collectionName"),
-                "artist": item.get("artistName"),
-                "artwork": item.get("artworkUrl100"),
-                "releaseDate": item.get("releaseDate", "")[:4]
-            })
+            if item.get("collectionName") and item.get("artworkUrl100"):
+                albums.append({
+                    "album": item.get("collectionName"),
+                    "artist": item.get("artistName"),
+                    "artwork": item.get("artworkUrl100"),
+                    "releaseDate": (item.get("releaseDate") or "")[:4]
+                })
 
         return jsonify(albums)
 
     except Exception as e:
-        print("Search API error:", e)
+        print("Search error:", e)
         return jsonify([])
 
 
-# 🔥 POPULAR SONGS
+#   POPULAR SONGS
 @app.route("/api/popular")
 def popular():
     artists = [
@@ -69,24 +70,25 @@ def popular():
             url = "https://itunes.apple.com/search"
             params = {
                 "term": artist,
-                "entity": "musicTrack",
-                "limit": 2
+                "entity": "song",
+                "limit": 3
             }
 
             response = requests.get(url, params=params, timeout=5)
             data = response.json()
 
             for item in data.get("results", []):
-                songs.append({
-                    "track": item.get("trackName"),
-                    "artist": item.get("artistName"),
-                    "album": item.get("collectionName"),
-                    "artwork": item.get("artworkUrl100"),
-                    "preview": item.get("previewUrl")
-                })
+                if item.get("trackName") and item.get("artworkUrl100"):
+                    songs.append({
+                        "track": item.get("trackName"),
+                        "artist": item.get("artistName"),
+                        "album": item.get("collectionName"),
+                        "artwork": item.get("artworkUrl100"),
+                        "preview": item.get("previewUrl")
+                    })
 
         except Exception as e:
-            print("Popular API error for", artist, ":", e)
+            print("Popular error:", artist, e)
 
     return jsonify(songs)
 

@@ -17,7 +17,7 @@ def home():
     return send_from_directory(app.static_folder, "index.html")
 
 @app.errorhandler(404)
-def catch_all(e):
+def catch_all(_e):
     return send_from_directory(app.static_folder, "index.html")
 
 # =========================

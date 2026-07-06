@@ -21,8 +21,8 @@ const App = () => {
   // POPULAR SONGS
   // ======================
   useEffect(() => {
-    async function fetchPopular() {
-      setLoading(true);
+    setLoading(true);
+    const fetchPopular = async () => {
 
     try {
       const res = await axios.get("http://localhost:5000/api/popular");

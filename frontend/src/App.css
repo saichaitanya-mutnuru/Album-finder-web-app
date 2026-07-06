@@ -1,5 +1,10 @@
+/* =========================
+   MAIN LAYOUT
+========================= */
 body {
   background: linear-gradient(135deg, #0a0a0a, #120000, #0f0f1a);
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
 body::before {
@@ -13,29 +18,79 @@ body::before {
     radial-gradient(circle at 20% 20%, rgba(255,0,0,0.08), transparent 40%),
     radial-gradient(circle at 80% 80%, rgba(0,255,133,0.06), transparent 40%);
   z-index: -1;
+  pointer-events: none;
 }
 
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  color: white;
+}
+
+/* =========================
+   NAVBAR
+========================= */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0;
+  margin-bottom: 20px;
+  border-bottom: 1px solid rgba(255, 0, 0, 0.1);
+}
+
+.navbar .logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 24px;
+  font-weight: 700;
+  color: white;
+  margin: 0;
+}
+
+.logo img {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* =========================
+   SEARCH CONTAINER
+========================= */
 .search-container {
   display: flex;
   justify-content: center;
   gap: 10px;
   margin: 20px 0 25px;
+  flex-wrap: wrap;
 }
 
 .search-container input {
   width: 340px;
   max-width: 80%;
   padding: 12px 14px;
-
   border: 1px solid #3a0f0f;
   border-radius: 8px;
-
   background: #0f0f0f;
   color: white;
-
   outline: none;
-
   box-shadow: inset 0 0 10px rgba(255, 0, 0, 0.1);
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+.search-container input::placeholder {
+  color: #777;
 }
 
 /* Focus effect */
@@ -43,21 +98,18 @@ body::before {
   border: 1px solid #ff3b3b;
   box-shadow: 0 0 12px rgba(255, 0, 0, 0.4);
 }
-.search-container button {
-  padding: 12px 16px;
 
+.search-container button {
+  padding: 12px 24px;
   border: none;
   border-radius: 8px;
-
   cursor: pointer;
   font-weight: 600;
   color: white;
-
   background: linear-gradient(135deg, #1a0000, #8b0000, #ff1a1a);
-
   box-shadow: 0 0 10px rgba(255, 0, 0, 0.3);
-
   transition: all 0.25s ease;
+  font-size: 14px;
 }
 
 /* hover glow */
@@ -78,33 +130,36 @@ body::before {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
   gap: 12px;
+  margin: 20px 0;
+}
+
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 10px;
+  }
 }
 
 /* =========================
    RECTANGLE CARD (PORTRAIT)
 ========================= */
 .card {
-  background: #1e1e1e;
-  border-radius: 12px;
-  padding: 10px;
-
-  display: flex;
-  flex-direction: column;
-
-  height: 260px;   /*MAIN HEIGHT CONTROL */
-  overflow: hidden;
-
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-.card {
   background: rgba(20, 20, 20, 0.85);
   backdrop-filter: blur(6px);
   border: 1px solid rgba(255, 0, 0, 0.1);
+  border-radius: 12px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  height: 260px;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
 }
 
 .card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 8px 18px rgba(0,0,0,0.5);
+  box-shadow: 0 8px 18px rgba(0,0,0,0.5), 0 0 15px rgba(255, 0, 0, 0.2);
 }
 
 /* =========================
@@ -112,7 +167,7 @@ body::before {
 ========================= */
 .image-wrapper {
   width: 100%;
-  height: 150px;   /*IMAGE AREA */
+  height: 150px;
   border-radius: 10px;
   overflow: hidden;
   background: #2a2a2a;
@@ -123,6 +178,11 @@ body::before {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: transform 0.2s ease;
+}
+
+.card:hover .image-wrapper img {
+  transform: scale(1.05);
 }
 
 /* =========================
@@ -132,28 +192,34 @@ body::before {
   font-size: 13px;
   margin: 4px 0;
   color: white;
+  font-weight: 600;
+  line-height: 1.3;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .card p {
   font-size: 11px;
   color: #bbb;
   margin: 2px 0;
+  font-weight: 500;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .card small {
   font-size: 10px;
   color: #1db954;
+  margin-top: auto;
 }
 
-
-.logo img {
-  width: 40px;
-  height: 40px;
-  object-fit: cover;
-  border-radius: 5px;
-}
-
-
+/* =========================
+   TAB BAR
+========================= */
 .tab-bar {
   display: flex;
   justify-content: center;
@@ -167,19 +233,14 @@ body::before {
   border-radius: 30px;
   border: none;
   cursor: pointer;
-
   color: white;
   font-weight: 600;
   font-size: 14px;
-
   background: linear-gradient(135deg, #7a0597, #7b0303, #0e439a);
   background-size: 200% 200%;
-
   box-shadow: 0 0 15px rgba(0, 198, 255, 0.4),
               0 0 25px rgba(0, 255, 133, 0.2);
-
   transition: all 0.3s ease;
-
   animation: gradientMove 4s ease infinite;
 }
 
@@ -195,7 +256,7 @@ body::before {
   transform: scale(0.97);
 }
 
-/*ANIMATED BACKGROUND SHIFT */
+/* ANIMATED BACKGROUND SHIFT */
 @keyframes gradientMove {
   0% {
     background-position: 0% 50%;
@@ -205,5 +266,94 @@ body::before {
   }
   100% {
     background-position: 0% 50%;
+  }
+}
+
+/* =========================
+   SECTION TITLE
+========================= */
+.section-title {
+  font-size: 20px;
+  font-weight: 700;
+  margin: 20px 0 15px;
+  color: white;
+  text-align: center;
+}
+
+/* =========================
+   LOADING & TEXT STATES
+========================= */
+h3 {
+  color: #bbb;
+  text-align: center;
+  padding: 20px;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+@media (max-width: 768px) {
+  .container {
+    padding: 15px;
+  }
+
+  .navbar {
+    flex-direction: column;
+    gap: 10px;
+    padding: 15px 0;
+  }
+
+  .search-container input {
+    width: 90%;
+  }
+
+  .card {
+    height: 240px;
+  }
+
+  .image-wrapper {
+    height: 130px;
+  }
+
+  .grid {
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar .logo {
+    font-size: 18px;
+    gap: 5px;
+  }
+
+  .logo img {
+    width: 30px;
+    height: 30px;
+  }
+
+  .nav-right span {
+    font-size: 12px;
+  }
+
+  .grid {
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 8px;
+  }
+
+  .card {
+    height: 200px;
+  }
+
+  .image-wrapper {
+    height: 100px;
+    margin-bottom: 6px;
+  }
+
+  .card h3 {
+    font-size: 11px;
+  }
+
+  .card p {
+    font-size: 10px;
   }
 }

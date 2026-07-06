@@ -21,7 +21,7 @@ const App = () => {
   // POPULAR SONGS
   // ======================
   useEffect(() => {
-    async function fetchPopular() {
+    const fetchPopular = async () => {
       setLoading(true);
 
     try {

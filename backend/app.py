@@ -3,21 +3,23 @@ from flask_cors import CORS
 import requests
 import os
 
+import os
+from flask import Flask, send_from_directory
+
+BASE_DIR = os.path.abspath(os.path.dirname(__file__))
+
 app = Flask(
     __name__,
-    static_folder="../frontend/dist",
+    static_folder=os.path.join(BASE_DIR, "../frontend/dist"),
     static_url_path=""
 )
-
-CORS(app)
-
 
 @app.route("/")
 def home():
     return send_from_directory(app.static_folder, "index.html")
 
 @app.errorhandler(404)
-def catch_all(e):
+def catch_all(_e):
     return send_from_directory(app.static_folder, "index.html")
 
 # =========================

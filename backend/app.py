@@ -1,15 +1,20 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
 import requests
+import os
 
-app = Flask(__name__)
+app = Flask(
+    __name__,
+    static_folder="../frontend/dist",
+    static_url_path=""
+)
+
 CORS(app)
 
 
 @app.route("/")
 def home():
-    return "Album Finder API is running!"
-
+    return send_from_directory(app.static_folder, "index.html")
 
 # =========================
 # SEARCH ALBUMS
@@ -123,6 +128,15 @@ def popular():
             print("Popular error:", artist, e)
 
     return jsonify(songs[:10])
+
+@app.route("/<path:path>")
+def serve(path):
+    file_path = os.path.join(app.static_folder, path)
+
+    if os.path.exists(file_path):
+        return send_from_directory(app.static_folder, path)
+
+    return send_from_directory(app.static_folder, "index.html")
 
 if __name__ == "__main__":
     app.run(debug=True)

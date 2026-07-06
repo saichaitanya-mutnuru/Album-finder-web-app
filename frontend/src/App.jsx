@@ -7,7 +7,7 @@ import AlbumCard from "./components/AlbumCard";
 
 import "./App.css";
 
-function App() {
+const App = () => {
   const [query, setQuery] = useState("");
   const [albums, setAlbums] = useState([]);
   const [songs, setSongs] = useState([]);
@@ -21,8 +21,8 @@ function App() {
   // POPULAR SONGS
   // ======================
   useEffect(() => {
-  async function fetchPopular() {
     setLoading(true);
+    const fetchPopular = async () => {
 
     try {
       const res = await axios.get("http://localhost:5000/api/popular");

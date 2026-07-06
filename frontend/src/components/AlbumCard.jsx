@@ -1,4 +1,4 @@
-function AlbumCard({ album }) {
+const AlbumCard = ({ album }) => {
   return (
     <div className="card">
 
@@ -16,6 +16,6 @@ function AlbumCard({ album }) {
 
     </div>
   );
-}
+};
 
 export default AlbumCard;

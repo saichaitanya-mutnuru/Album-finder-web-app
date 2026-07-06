@@ -43,8 +43,8 @@ album-finder/
 ├── frontend/
 |   |─────── public/
 |   |       |──home.png
-|   |       |──home.png
-|   |       |──home.png
+|   |       |──search.png
+|   |       |──todayspick.png
 │   ├── src/
 │   │────── components/
 │   │       ├── Navbar.jsx

@@ -15,7 +15,6 @@ def home():
 # SEARCH ALBUMS
 # =========================
 @app.route("/api/search")
-@app.route("/api/search")
 def search():
 
     query = request.args.get("q", "").strip()

@@ -1,6 +1,6 @@
 import logo from "../assets/logo.png";
 
-function Navbar() {
+const Navbar = () => {
   return (
     <nav className="navbar">
 

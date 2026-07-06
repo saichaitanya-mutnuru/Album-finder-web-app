@@ -25,7 +25,7 @@ const App = () => {
     const fetchPopular = async () => {
 
     try {
-      const res = await axios.get("http://localhost:5000/api/popular");
+      const res = await axios.get("/api/popular");
       setSongs(res.data);
     } catch (err) {
       console.log(err);
@@ -52,7 +52,7 @@ const App = () => {
 
     try {
       const res = await axios.get(
-        `http://localhost:5000/api/search?q=${cleanQuery}&page=1&limit=20`
+        `/api/search?q=${cleanQuery}&page=1&limit=20`
       );
 
       setAlbums(res.data);
@@ -74,7 +74,7 @@ const App = () => {
 
   try {
     const res = await axios.get(
-      `http://localhost:5000/api/search?q=${query}&page=${nextPage}&limit=20`
+      `/api/search?q=${query}&page=${nextPage}&limit=20`
     );
 
     setAlbums((prev) => [...prev, ...res.data]);

@@ -16,6 +16,10 @@ CORS(app)
 def home():
     return send_from_directory(app.static_folder, "index.html")
 
+@app.errorhandler(404)
+def catch_all(e):
+    return send_from_directory(app.static_folder, "index.html")
+
 # =========================
 # SEARCH ALBUMS
 # =========================
